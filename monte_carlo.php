@@ -7,7 +7,7 @@ function simulation(int $prob_of_buy = 20): array {
     }
 
     $buy_immediately = rand(0, 100);
-    if($buy_immediately < 10){
+    if($buy_immediately > 90){
         return immediately_buy();
     }
     return not_buy();
@@ -99,7 +99,7 @@ for($i = 1; $i < $users_num; ++$i){
 
         if($result["discount"] != 0){
             $discount_users += 1;
-            $discount_cost += $current_sale - $current_sale / $result["discount"];
+            $discount_cost += $current_sale - ($current_sale / $result["discount"]);
 
             if($result["discount"] == 15){
                 $discount_15_users_num += 1;
@@ -119,7 +119,7 @@ $remarketing_cost = $remarketing * 2.5;
 echo "Probability of buying the book is " . ($successful_sells / $users_num) * 100 . " %\n";
 echo "Total cost for instagram ad " . $marketing_cost . "\n";
 echo "Total cost for discounts " . $discount_cost . "(" . $discount_cost / $total_income * 100 . " %)\n";
-echo "Total users subscribed newsletter " . (100 * $discount_15_users_num) / 4 . "\n";
+echo "Total users subscribed newsletter " . (100 * $discount_15_users_num) / rand(1, 4) . "\n";
 echo "Number of people who bought " . $successful_sells . "\n";
 echo "How much did it cost on average to get one customer " . (($marketing_cost + $remarketing_cost) / $successful_sells) . "\n";
 echo "People who used discounts " . $discount_users . "\n";
